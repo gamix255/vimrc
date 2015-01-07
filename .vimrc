@@ -1,3 +1,7 @@
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,iso-2022-jp,utf-8,cp932,euc-jp,default,latin
+:scriptencoding utf-8
 "original authour http://vim-bootstrap.com/ 2014/08/25
 "selected html,js,lisp,python,ruby
 
@@ -5,17 +9,14 @@
 "" NeoBundle core
 "*****************************************************************************
 if has('vim_starting')
-  set nocompatible               " Be iMproved
-
-  " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 
 if !filereadable(neobundle_readme)
-  echo "Installing NeoBundle..."
-  echo ""
+  echo 'Installing NeoBundle...'
+  echo ''
    !mkdir -p ~/.vim/bundle
    !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
 endif
@@ -86,10 +87,6 @@ NeoBundleCheck
 "" Basic Setup
 "*****************************************************************************"
 "" Encoding
-set encoding=utf-8
-set fileencoding=utf-8
-"" from
-set fileencodings=ucs-bom,iso-2022-jp,utf-8,cp932,euc-jp,default,latin
 
 "" Fix backspace indent
 set backspace=indent,eol,start
@@ -147,24 +144,24 @@ set nocursorline
 set guioptions=egmrti
 set gfn=Monospace\ 8
 
-if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
+if has('gui_running')
+  if has('gui_mac') || has('gui_macvim')
     set guifont=Menlo:h12
     set transparency=7
   endif
 else
   let g:CSApprox_loaded = 1
-
-  if $COLORTERM == 'gnome-terminal'
+""FIXME: check next line ==# or ==?etc 
+  if $COLORTERM ==# 'gnome-terminal'
     set term=gnome-256color
   else
-    if $TERM == 'xterm'
+    if $TERM ==# 'xterm'
       set term=xterm-256color
     endif
   endif
 endif
 
-if &term =~ '256color'
+if &term =~# '256color'
   set t_ut=
 endif
 
@@ -233,7 +230,7 @@ function s:setupWrapping()
 endfunction
 
 function TrimWhiteSpace()
-  let @*=line(".")
+  let @*=line('.')
   %s/\s*$//e
   ''
 endfunction
@@ -362,13 +359,13 @@ autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
 
 " jedi-vim
 let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
+let g:jedi#goto_assignments_command = '<leader>g'
+let g:jedi#goto_definitions_command = '<leader>d'
+let g:jedi#documentation_command = 'K'
+let g:jedi#usages_command = '<leader>n'
+let g:jedi#rename_command = '<leader>r'
+let g:jedi#show_call_signatures = '0'
+let g:jedi#completions_command = '<C-Space>'
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
