@@ -238,6 +238,7 @@ endfunction
 "*****************************************************************************
 "" Autocmd Rules
 "*****************************************************************************
+augroup vimrc_loading
 "" The PC is fast enough, do syntax highlight syncing from start
 autocmd BufEnter * :syntax sync fromstart
 
@@ -251,11 +252,12 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 au FileType make set noexpandtab
 autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
 
-if has("gui_running")
+if has('gui_running')
   autocmd BufWritePre * :call TrimWhiteSpace()
 endif
 
 set autoread
+augroup END
 
 "*****************************************************************************
 "" Mappings
@@ -351,12 +353,12 @@ noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=lin
 "" Custom configs
 
 
-
+augroup vimrc_vim_python
 " vim-python
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
     \ formatoptions+=croq softtabstop=4 smartindent
     \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-
+augroup END
 " jedi-vim
 let g:jedi#popup_on_dot = 0
 let g:jedi#goto_assignments_command = '<leader>g'
@@ -406,6 +408,6 @@ let g:tagbar_type_ruby = {
 
 
 "" Include user's local vim config
-if filereadable(expand("~/.vimrc.local"))
+if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
